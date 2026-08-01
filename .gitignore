@@ -1,9 +1,11 @@
-node_modules
-.dist
-/dist
-.vercel
+node_modules/
+dist/
+.dist/
+.vercel/
 .env
 .env.*
+backend/.env
+frontend/DSAToday/.env
 !.env.example
 .env.local
 npm-debug.log*
