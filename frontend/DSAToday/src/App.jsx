@@ -7,13 +7,6 @@ import QuestionList from "./components/QuestionList.jsx";
 import SearchFilter from "./components/SearchFilter.jsx";
 
 const storageKey = "dsaTodayUser";
-const apiBaseUrl = import.meta.env.DEV
-  ? ""
-  : "https://dsa-of-the-day.onrender.com";
-
-function apiPath(path) {
-  return `${apiBaseUrl}${path}`;
-}
 
 function readStoredUser() {
   try {
@@ -95,8 +88,8 @@ function App() {
 
       try {
         const [usersResponse, questionsResponse] = await Promise.all([
-          fetch(apiPath("/api/users")),
-          fetch(apiPath("/api/questions")),
+          fetch("/api/users"),
+          fetch("/api/questions"),
         ]);
 
         if (!usersResponse.ok || !questionsResponse.ok) {
@@ -151,7 +144,7 @@ function App() {
     setAuthError("");
 
     try {
-      const response = await fetch(apiPath("/api/users/login"), {
+      const response = await fetch("/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -201,7 +194,7 @@ function App() {
     setActionError("");
 
     try {
-      const response = await fetch(apiPath("/api/questions"), {
+      const response = await fetch("/api/questions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -228,16 +221,13 @@ function App() {
     setActionError("");
 
     try {
-      const response = await fetch(
-        apiPath(`/api/questions/${questionId}/toggle`),
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId: user._id }),
+      const response = await fetch(`/api/questions/${questionId}/toggle`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({ userId: user._id }),
+      });
 
       const responseData = await response.json();
 
