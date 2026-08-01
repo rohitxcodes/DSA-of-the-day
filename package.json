@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:api": "node dev-server.mjs",
+    "dev:api": "node backend/dev-server.mjs",
+    "dev:backend": "node backend/dev-server.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
